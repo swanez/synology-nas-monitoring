@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--web.external-url=/prometheus'
+      - '--web.route-prefix=/'
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=M4g1cP4ssw0rd
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_ROOT_URL=http://192.168.1.13/grafana/
+      - GF_SERVER_SERVE_FROM_SUB_PATH=false
+
+    restart: unless-stopped
+
+  snmp-exporter:
+    image: prom/snmp-exporter:latest
+    volumes:
+      - ./snmp.yml:/etc/snmp-exporter/snmp.yml
+    ports:
+      - "9116:9116"
+    networks:
+      - monitoring
+    command:
+      - '--config.file=/etc/snmp_exporter/snmp.yml'
+      - '--log.level=debug'
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    networks:
+      - monitoring
+    depends_on:
+      - prometheus
+      - grafana
+    restart: unless-stopped
+
+volumes:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  monitoring:
+    driver: bridge
