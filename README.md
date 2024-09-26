@@ -9,7 +9,7 @@ This monitoring system allows you to collect and visualize various metrics from 
 - Prometheus: Time-series database for storing metrics
 - Grafana: Visualization tool for creating dashboards
 - SNMP Exporter: Translates SNMP data from the Synology NAS into a format Prometheus can scrape
-- 
+
 #### Prerequisites
 - A virtual Linux machine or a physical server to host the monitoring system
 - Docker and Docker Compose installed on the host machine
