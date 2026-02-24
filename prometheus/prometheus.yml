@@ -1,6 +1,5 @@
 global:
   scrape_interval: 30s
-  scrape_timeout: 25s
   evaluation_interval: 30s
 
 scrape_configs:
@@ -8,18 +7,13 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'snmp_exporter'
+  - job_name: 'synology_nas'
     static_configs:
-      - targets: ['nas-monitoring-snmp-exporter-1:9116']
-
-  - job_name: 'synology_snmp'
+      - targets: ['192.168.1.5']
     metrics_path: /snmp
     params:
       module: [synology]
-    scrape_interval: 30s
-    scrape_timeout: 25s
-    static_configs:
-      - targets: ['192.168.1.5']  # Your Synology NAS IP
+      auth: [public_v2]
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
