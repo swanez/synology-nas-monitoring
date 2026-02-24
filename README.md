@@ -45,7 +45,7 @@ Uses Grafana dashboard [18643 - Synology SNMP](https://grafana.com/grafana/dashb
 
 Import via Grafana → Dashboards → Import → ID `18643`.
 
-## Notes
+### Notes
 
 - SNMP Exporter is pinned to `v0.25.0` due to a breaking auth format change introduced in `v0.26.0`. Upgrading requires migrating `snmp.yml` to the new auth-split format. See the [migration guide](https://github.com/prometheus/snmp_exporter/blob/main/auth-split-migration.md).
 - Nginx uses `proxy_pass http://grafana:3000` without a trailing slash to preserve the `/grafana/` subpath, which is required for `GF_SERVER_SERVE_FROM_SUB_PATH=true` to work correctly.
