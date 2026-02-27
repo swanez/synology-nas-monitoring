@@ -1773,117 +1773,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": "left",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "footer": {
-              "reducers": []
-            },
-            "inspect": false
-          },
-          "decimals": 1,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 0,
-        "y": 10
-      },
-      "id": 200,
-      "options": {
-        "cellHeight": "sm",
-        "enablePagination": false,
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "Metric"
-          }
-        ]
-      },
-      "pluginVersion": "12.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "expr": "raidTotalSize{job=~'$job',instance=~'$instance',raidIndex='0'}",
-          "format": "time_series",
-          "instant": true,
-          "legendFormat": "Total Storage",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "expr": "raidTotalSize{job=~'$job',instance=~'$instance',raidIndex='0'} - raidFreeSize{job=~'$job',instance=~'$instance',raidIndex='0'}",
-          "format": "time_series",
-          "instant": true,
-          "legendFormat": "Used Storage",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "expr": "raidFreeSize{job=~'$job',instance=~'$instance',raidIndex='0'}",
-          "format": "time_series",
-          "instant": true,
-          "legendFormat": "Free Storage",
-          "refId": "C"
-        }
-      ],
-      "title": "Volume 1 Storage",
-      "transformations": [
-        {
-          "id": "seriesToRows",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Metric": false,
-              "Time": true
-            },
-            "includeByName": {},
-            "indexByName": {},
-            "orderByMode": "manual",
-            "renameByName": {
-              "Metric": "Volume 1",
-              "Value": "Size"
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": {
         "type": "prometheus",
         "uid": "bfe8m47kngagwe"
       },
@@ -2069,8 +1958,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 12,
-        "x": 12,
+        "w": 16,
+        "x": 0,
         "y": 10
       },
       "id": 62,
@@ -2180,6 +2069,117 @@
               "diskID": "Disk",
               "diskModel": "Model",
               "diskType": "Type"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 16,
+        "y": 10
+      },
+      "id": 200,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": false,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Metric"
+          }
+        ]
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus"
+          },
+          "expr": "raidTotalSize{job=~'$job',instance=~'$instance',raidIndex='0'}",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "Total Storage",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus"
+          },
+          "expr": "raidTotalSize{job=~'$job',instance=~'$instance',raidIndex='0'} - raidFreeSize{job=~'$job',instance=~'$instance',raidIndex='0'}",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "Used Storage",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus"
+          },
+          "expr": "raidFreeSize{job=~'$job',instance=~'$instance',raidIndex='0'}",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "Free Storage",
+          "refId": "C"
+        }
+      ],
+      "title": "Volume 1 Storage",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Metric": false,
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "orderByMode": "manual",
+            "renameByName": {
+              "Metric": "Volume 1",
+              "Value": "Size"
             }
           }
         }
@@ -4473,6 +4473,6 @@
   "timezone": "browser",
   "title": "Synology SNMP",
   "uid": "RT8yFrEVz",
-  "version": 3,
+  "version": 4,
   "weekStart": "monday"
 }
